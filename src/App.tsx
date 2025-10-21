@@ -1,7 +1,21 @@
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import UserContext from "./context/UserContext";
+import Home from "./components/Home";
+import PageNotFound from "./components/PageNotFound";
+import QuizPage from "./components/QuizPage";
+
 function App() {
+  const [username, setUsername] = useState("");
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <UserContext.Provider value={{ username, setUsername }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </UserContext.Provider>
     </>
   );
 }
