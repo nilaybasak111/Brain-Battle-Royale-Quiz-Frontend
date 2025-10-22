@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
@@ -9,7 +9,7 @@ const Home = () => {
   const [quizSettings, setQuizSettings] = useState<{ category: string }>({
     category: "",
   });
-  const [, setError] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuizSettings({ category: e.target.value });
@@ -19,10 +19,32 @@ const Home = () => {
   // }, [quizSettings.category]);
 
   const StarQuiz = async () => {
+    let category = "";
+    if (username === "") {
+      alert("Please Enter Your Name");
+      return;
+    }
+    if (quizSettings.category === "") {
+      alert("Please Select a Category");
+      return;
+    }
+    if (quizSettings.category === "gk") {
+      category = "amount=10&category=9&difficulty=easy&type=multiple";
+    } else if (quizSettings.category === "movies") {
+      category = "amount=10&category=11&difficulty=easy&type=multiple";
+    } else if (quizSettings.category === "computers") {
+      category = "amount=10&category=18&difficulty=easy&type=multiple";
+    } else if (quizSettings.category === "books") {
+      category = "amount=10&category=10&difficulty=easy&type=multiple";
+    } else if (quizSettings.category === "games") {
+      category = "amount=10&category=15&difficulty=easy&type=multiple";
+    } else if (quizSettings.category === "animals") {
+      category = "amount=10&category=27&difficulty=easy&type=multiple";
+    }
     //console.log("This is Backend API", import.meta.env.VITE_BACKEND_API);
     // Calling Backend API
     await axios
-      .get(import.meta.env.VITE_BACKEND_API)
+      .get(`${import.meta.env.VITE_BACKEND_API}?${category}`)
       .then((res) => {
         setQuizData(res.data.results);
         //console.log(res.data.results);
