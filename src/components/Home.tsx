@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
@@ -9,7 +9,7 @@ const Home = () => {
   const [quizSettings, setQuizSettings] = useState<{ category: string }>({
     category: "",
   });
-  const [error, setError] = useState<string>("");
+  const [, setError] = useState<string>("");
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuizSettings({ category: e.target.value });
@@ -25,7 +25,7 @@ const Home = () => {
       .get(import.meta.env.VITE_BACKEND_API)
       .then((res) => {
         setQuizData(res.data.results);
-        console.log(res.data.results);
+        //console.log(res.data.results);
         navigate("/quiz");
       })
       .catch((error) => {

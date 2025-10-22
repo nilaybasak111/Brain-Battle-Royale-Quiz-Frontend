@@ -11,6 +11,8 @@ interface UserContextType {
   setUsername: (name: string) => void;
   quizData: QuestionType[];
   setQuizData: (data: QuestionType[]) => void;
+  score: number;
+  setScore: (score: number) => void;
 }
 
 const UserContext = React.createContext<UserContextType>({
@@ -18,6 +20,8 @@ const UserContext = React.createContext<UserContextType>({
   setUsername: () => {},
   quizData: [],
   setQuizData: () => {},
+  score: 0,
+  setScore: () => {},
 });
-console.log("This is UserContext", UserContext);
+//console.log("This is UserContext", UserContext);
 export default UserContext;
