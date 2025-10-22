@@ -1,37 +1,36 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
-interface QuestionType {
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
-
 const Home = () => {
   const navigate = useNavigate();
-  const { username, setUsername } = useContext(UserContext);
-  const [data, setData] = useState<QuestionType>({
-    question: "",
-    correct_answer: "",
-    incorrect_answers: [],
+  const { username, setUsername, setQuizData } = useContext(UserContext);
+  const [quizSettings, setQuizSettings] = useState<{ category: string }>({
+    category: "",
   });
   const [error, setError] = useState<string>("");
 
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuizSettings({ category: e.target.value });
+  };
+  //   useEffect(() => {
+  //     console.log("Category State has officially updated:", quizSettings.category);
+  // }, [quizSettings.category]);
+
   const StarQuiz = async () => {
-    console.log("This is Backend API", import.meta.env.VITE_BACKEND_API);
+    //console.log("This is Backend API", import.meta.env.VITE_BACKEND_API);
     // Calling Backend API
     await axios
       .get(import.meta.env.VITE_BACKEND_API)
       .then((res) => {
-        setData(res.data.results);
+        setQuizData(res.data.results);
         console.log(res.data.results);
         navigate("/quiz");
       })
       .catch((error) => {
         console.log(error);
-        setError("Failed to Fetch Todos");
+        setError("Failed to Fetch Questions");
       });
   };
 
@@ -49,7 +48,7 @@ const Home = () => {
           placeholder="Please Enter Your Full Name"
           onChange={(e) => {
             setUsername(e.target.value);
-            console.log(username);
+            //console.log(username);
           }}
         />
         {/* Select Quiz Category */}
@@ -59,48 +58,78 @@ const Home = () => {
             <input
               type="radio"
               className="form-check-input"
-              id="radio1"
-              name="optradio"
-              value="option1"
+              name="quizCategory"
+              value="gk"
+              checked={quizSettings.category === "gk"}
+              onChange={handleCategoryChange}
             />
-            <label className="form-check-label" htmlFor="radio1">
-              Option 1
+            <label className="form-check-label" htmlFor="gk">
+              General Khowlwdge
             </label>
           </div>
           <div className="form-check">
             <input
               type="radio"
               className="form-check-input"
-              id="radio2"
-              name="optradio"
-              value="option2"
+              name="quizCategory"
+              value="movies"
+              checked={quizSettings.category === "movies"}
+              onChange={handleCategoryChange}
             />
-            <label className="form-check-label" htmlFor="radio2">
-              Option 2
+            <label className="form-check-label" htmlFor="movies">
+              Movies
             </label>
           </div>
           <div className="form-check">
             <input
               type="radio"
               className="form-check-input"
-              id="radio3"
-              name="optradio"
-              value="option3"
+              name="quizCategory"
+              value="computers"
+              checked={quizSettings.category === "computers"}
+              onChange={handleCategoryChange}
             />
-            <label className="form-check-label" htmlFor="radio3">
-              Option 3
+            <label className="form-check-label" htmlFor="computers">
+              Computers
             </label>
           </div>
           <div className="form-check">
             <input
               type="radio"
               className="form-check-input"
-              id="radio4"
-              name="optradio"
-              value="option4"
+              name="quizCategory"
+              value="books"
+              checked={quizSettings.category === "books"}
+              onChange={handleCategoryChange}
             />
-            <label className="form-check-label" htmlFor="radio4">
-              Option 4
+            <label className="form-check-label" htmlFor="books">
+              Books
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              className="form-check-input"
+              name="quizCategory"
+              value="games"
+              checked={quizSettings.category === "games"}
+              onChange={handleCategoryChange}
+            />
+            <label className="form-check-label" htmlFor="games">
+              Video Games
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              type="radio"
+              className="form-check-input"
+              name="quizCategory"
+              value="animals"
+              checked={quizSettings.category === "animals"}
+              onChange={handleCategoryChange}
+            />
+            <label className="form-check-label" htmlFor="animals">
+              Animals
             </label>
           </div>
         </div>

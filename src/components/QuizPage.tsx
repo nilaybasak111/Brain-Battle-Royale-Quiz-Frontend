@@ -2,8 +2,9 @@ import { useContext } from "react";
 import UserContext from "../context/UserContext";
 
 const QuizPage = () => {
-  const { username } = useContext(UserContext);
+  const { username, quizData } = useContext(UserContext);
   console.log("This is username in quiz page", username);
+  console.log("This is quizData in quiz page", quizData);
   return (
     <div className="container m-5 bg-black">
       <div className="container-fluid">
