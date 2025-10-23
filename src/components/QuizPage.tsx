@@ -68,18 +68,18 @@ const QuizPage = () => {
   const getButtonClass = (answer: string) => {
     // If no answer has been submitted, use default light theme
     if (!answerSubmitted) {
-      return "btn-light text-dark";
+      return "btn-outline-secondary";
     }
     // If the answer has been submitted
     if (answer === currentQuestion.correct_answer) {
       // The correct answer is always green
-      return "btn-success text-white";
+      return "btn-success text-white border-success";
     } else if (answer === selectedAnswer) {
       // The user's incorrect choice is red
-      return "btn-danger text-white";
+      return "btn-danger text-white border-danger";
     }
     // All other incorrect choices are greyed out
-    return "btn-light text-dark opacity-50";
+    return "btn-light text-secondary disabled";
   };
 
   return (
@@ -93,15 +93,19 @@ const QuizPage = () => {
           width: "100%",
           maxWidth: "1100px",
           height: "85vh",
-          backgroundColor: "#5c3a7e",
+          backgroundColor: "#2C3E50",
         }}
       >
-        <h2 className="col-12 text-center text-white fw-bold fs-4 p-3 mb-0 rounded-top-4 bg-gradient">
+        <h2
+          className="col-12 text-center text-white fw-bolder fs-4 p-3 mb-0 rounded-top-4"
+          style={{ backgroundColor: "#1C3144" }}
+        >
           Welcome, {username.toUpperCase()}
         </h2>
 
+        {/* Image Column */}
         <div
-          className="col-md-4 d-none d-md-block rounded-2"
+          className="col-md-5 d-none d-md-block rounded-2"
           style={{
             backgroundImage:
               "url('https://i.natgeofe.com/k/f5b0d18e-78f4-4697-bd3f-509aaa3bf606/1900x1068_herolead_quiz_3x4.jpg')",
@@ -114,36 +118,39 @@ const QuizPage = () => {
         ></div>
 
         <div
-          className="col-md-7 d-flex flex-column text-center justify-content-center pb-5 px-3 text-white overflow-auto"
-          style={{ maxHeight: "80vh" }}
+          className="col-md-7 d-flex flex-column justify-content-center pb-5 px-4 text-dark overflow-auto"
+          style={{
+            maxHeight: "80vh",
+            backgroundColor: "#FFFFFF",
+          }}
         >
           {/* Question Column */}
-          <div className="bg-success p-3 rounded mb-3">
-            <h4 className="mb-2">
+          <div
+            className="p-4 rounded mb-4 shadow-sm"
+            style={{ backgroundColor: "#214F3D", color: "white" }}
+          >
+            <h4 className="mb-3 fw-bold fs-5">
               {decodeHTMLEntities(decodeHTMLEntities(currentQuestion.question))}
             </h4>
-            <h5 className="mb-0">
+            <h5 className="mb-0 text-white-50">
               Question {currentQuestionIndex + 1} of {quizData.length}
             </h5>
           </div>
 
           {/* Answer Options Column */}
-          <div className="bg-warning p-2 rounded overflow-auto">
+          <div className="rounded overflow-auto">
             {answers.map((answer, index) => (
-              <div
-                key={index}
-                className="form-check p-2 mb-2 border rounded text-dark bg-light"
-              >
+              <div key={index} className="mb-3">
                 <button
                   className={`btn ${getButtonClass(
                     answer
-                  )} w-100 text-center text-start fw-semibold`}
+                  )} w-100 text-center fw-semibold text-start shadow-sm border`}
                   onClick={() => handleAnswerClick(answer)}
                   disabled={answerSubmitted}
                   style={{
-                    fontSize: "1rem",
-                    padding: "10px 16px",
-                    borderRadius: "8px",
+                    fontSize: "1.1rem",
+                    padding: "12px 18px",
+                    borderRadius: "10px",
                     transition: "all 0.3s ease",
                     whiteSpace: "normal",
                     wordWrap: "break-word",
