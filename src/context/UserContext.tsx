@@ -12,7 +12,7 @@ interface UserContextType {
   quizData: QuestionType[];
   setQuizData: (data: QuestionType[]) => void;
   score: number;
-  setScore: (score: number) => void;
+  setScore: (score: number | ((prevScore: number) => number)) => void;
 }
 
 const UserContext = React.createContext<UserContextType>({
