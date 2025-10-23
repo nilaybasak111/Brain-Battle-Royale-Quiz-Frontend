@@ -57,7 +57,6 @@ const QuizPage = () => {
       if (isLastQuestion) {
         navigate("/result");
       } else {
-        //setCurrentQuestionIndex(currentQuestionIndex + 1);
         setCurrentQuestionIndex((prev) => prev + 1);
         setSelectedAnswer(null);
         setAnswerSubmitted(false);
@@ -85,33 +84,42 @@ const QuizPage = () => {
 
   return (
     <div
-      className="container-fluid min-vh-100 d-flex justify-content-center align-items-center p-5"
+      className="container-fluid min-vh-100 d-flex justify-content-center align-items-center p-4"
       style={{ backgroundColor: "#214F3D" }}
     >
       <div
         className="row g-0 rounded-4 shadow-lg overflow-hidden"
-        style={{ width: "100%", maxWidth: "1200px", height: "86vh" }}
+        style={{
+          width: "100%",
+          maxWidth: "1100px",
+          height: "85vh",
+          backgroundColor: "#5c3a7e",
+        }}
       >
-        <h2 className="col-12 text-center text-white fw-bold fs-4 p-3 mb-0 rounded-top-4">
+        <h2 className="col-12 text-center text-white fw-bold fs-4 p-3 mb-0 rounded-top-4 bg-gradient">
           Welcome, {username.toUpperCase()}
         </h2>
+
         <div
-          className="col-md-5 d-none d-md-block"
+          className="col-md-5 d-none d-md-block rounded-2"
           style={{
-            backgroundColor: "#644085",
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
+              "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            height: "100%",
+            minHeight: "85vh",
+            maxHeight: "85vh",
           }}
         ></div>
+
         <div
-          className="col-md-7 d-flex flex-column justify-content-between p-5 text-white"
-          style={{ backgroundColor: "#5c3a7e" }}
+          className="col-md-7 d-flex flex-column justify-content-between pb-5 px-3 text-white overflow-auto"
+          style={{ maxHeight: "75vh" }}
         >
           {/* Question Column */}
-          <div className="col-12 bg-success p-3 rounded mb-3">
-            <h4>
+          <div className="bg-success p-3 rounded mb-3">
+            <h4 className="mb-2">
               {decodeHTMLEntities(decodeHTMLEntities(currentQuestion.question))}
             </h4>
             <h5 className="mb-0">
@@ -120,16 +128,26 @@ const QuizPage = () => {
           </div>
 
           {/* Answer Options Column */}
-          <div className="col-12 bg-warning p-3 rounded">
+          <div className="bg-warning p-3 rounded overflow-auto">
             {answers.map((answer, index) => (
               <div
                 key={index}
-                className="form-check p-3 mb-2 border rounded text-dark bg-light"
+                className="form-check p-2 mb-2 border rounded text-dark bg-light"
               >
                 <button
-                  className={`btn ${getButtonClass(answer)} w-100 text-start`}
+                  className={`btn ${getButtonClass(
+                    answer
+                  )} w-100 text-start fw-semibold`}
                   onClick={() => handleAnswerClick(answer)}
                   disabled={answerSubmitted}
+                  style={{
+                    fontSize: "1rem",
+                    padding: "10px 16px",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                  }}
                 >
                   {decodeHTMLEntities(answer)}
                 </button>
