@@ -101,10 +101,10 @@ const QuizPage = () => {
         </h2>
 
         <div
-          className="col-md-5 d-none d-md-block rounded-2"
+          className="col-md-4 d-none d-md-block rounded-2"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')",
+              "url('https://i.natgeofe.com/k/f5b0d18e-78f4-4697-bd3f-509aaa3bf606/1900x1068_herolead_quiz_3x4.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "100%",
@@ -114,8 +114,8 @@ const QuizPage = () => {
         ></div>
 
         <div
-          className="col-md-7 d-flex flex-column justify-content-between pb-5 px-3 text-white overflow-auto"
-          style={{ maxHeight: "75vh" }}
+          className="col-md-7 d-flex flex-column text-center justify-content-center pb-5 px-3 text-white overflow-auto"
+          style={{ maxHeight: "80vh" }}
         >
           {/* Question Column */}
           <div className="bg-success p-3 rounded mb-3">
@@ -128,7 +128,7 @@ const QuizPage = () => {
           </div>
 
           {/* Answer Options Column */}
-          <div className="bg-warning p-3 rounded overflow-auto">
+          <div className="bg-warning p-2 rounded overflow-auto">
             {answers.map((answer, index) => (
               <div
                 key={index}
@@ -137,7 +137,7 @@ const QuizPage = () => {
                 <button
                   className={`btn ${getButtonClass(
                     answer
-                  )} w-100 text-start fw-semibold`}
+                  )} w-100 text-center text-start fw-semibold`}
                   onClick={() => handleAnswerClick(answer)}
                   disabled={answerSubmitted}
                   style={{

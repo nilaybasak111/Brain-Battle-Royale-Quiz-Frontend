@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Result = () => {
   const navigate = useNavigate();
-  const { score, setScore } = useContext(UserContext);
+  const { score, setScore, setUsername } = useContext(UserContext);
   return (
     <div className="container m-5">
       <h2>Result</h2>
@@ -18,6 +18,7 @@ const Result = () => {
           className="btn btn-primary"
           onClick={() => {
             setScore(0);
+            setUsername("");
             navigate("/");
           }}
         >
