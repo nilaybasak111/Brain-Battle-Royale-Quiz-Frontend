@@ -140,8 +140,7 @@ const QuizPage = () => {
         <div
           className="col-md-5 d-none d-md-block rounded-2"
           style={{
-            backgroundImage:
-              "url('https://i.natgeofe.com/k/f5b0d18e-78f4-4697-bd3f-509aaa3bf606/1900x1068_herolead_quiz_3x4.jpg')",
+            backgroundImage: "url('./src/assets/QuizPage_ImageColumn_3x4.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "100%",

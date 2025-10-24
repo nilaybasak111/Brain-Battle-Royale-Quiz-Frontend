@@ -244,7 +244,7 @@ const Home = () => {
                   {/* Right side: Image */}
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                     <img
-                      src="https://media.istockphoto.com/id/1777656272/vector/speech-bubble-with-the-word-quiz-time-blue-label-vector-stock-illustration.jpg?s=612x612&w=0&k=20&c=yKLTMLXadEPvyBq1EM4ygbfKjV9Ul68gM8El_nfehW0="
+                      src="./src/assets/Home_RightsideImage.jpg"
                       className="img-fluid"
                       alt="quiz"
                     />
