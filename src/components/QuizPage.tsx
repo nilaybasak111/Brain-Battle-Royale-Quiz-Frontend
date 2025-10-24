@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -72,11 +72,13 @@ const QuizPage = () => {
 
   const currentQuestion = quizData[currentQuestionIndex];
   //console.log("This is currentQuestion", currentQuestion);
-  const answers = shuffleArray([
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ]);
-  //console.log("This is answer", answers);
+  const answers = useMemo(() => {
+    return shuffleArray([
+      currentQuestion.correct_answer,
+      ...currentQuestion.incorrect_answers,
+    ]);
+  }, [currentQuestionIndex]);
+
   const handleAnswerClick = (answer: string) => {
     if (answerSubmitted) return;
     setSelectedAnswer(answer);
