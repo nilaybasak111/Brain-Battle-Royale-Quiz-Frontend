@@ -16,12 +16,45 @@ const QuizPage = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [answerSubmitted, setAnswerSubmitted] = useState(false);
 
+  // Redirect if user visits result page directly without playing
   if (quizData.length === 0) {
     setTimeout(() => navigate("/"), 3000);
     return (
-      <div className="container m-5">
-        <p>No Quiz Data Available. Please Start A Quiz from the Home Page.</p>
-        <p>Redirecting to Home Page in 3 seconds...</p>
+      <div
+        className="d-flex justify-content-center align-items-center min-vh-100 flex-column text-center"
+        style={{
+          backgroundColor: "#214F3D",
+          color: "#fff",
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        <div
+          className="p-5 rounded-4 shadow-lg"
+          style={{
+            backgroundColor: "#5c3a7e",
+            width: "420px",
+            boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          <h2 className="fw-bold mb-3" style={{ color: "#FFC107" }}>
+            ⚠️ No Quiz Data Available
+          </h2>
+          <p className="lead mb-1">
+            Please Start A Quiz from the{" "}
+            <span className="fw-semibold">Home</span> Page.
+          </p>
+          <p className="text-light mb-4">
+            Redirecting to Home Page in 3 Seconds...
+          </p>
+
+          <div
+            className="spinner-border text-warning"
+            style={{ width: "3rem", height: "3rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -30,7 +63,7 @@ const QuizPage = () => {
   //   console.log("This is currentQuestionIndex", currentQuestionIndex);
   // });
 
-  // Function to Decode HTML Entities
+  // Function to Decode HTML Entities to Normal Text
   const decodeHTMLEntities = (str: string): string => {
     const textarea = document.createElement("textarea");
     textarea.innerHTML = str;
